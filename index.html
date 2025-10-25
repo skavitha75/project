@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chat UI — Frontend Only (LocalStorage)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <header class="sidebar-header">
+        <h2>Contacts</h2>
+      </header>
+
+      <ul id="contactsList" class="contacts-list">
+        <!-- populated by JS -->
+      </ul>
+
+      <footer class="sidebar-footer">
+        <button id="clearStorage">Clear Local Storage</button>
+      </footer>
+    </aside>
+
+    <main class="chat-area">
+      <div class="chat-header" id="chatHeader">
+        <!-- chat title populated by JS -->
+      </div>
+
+      <div class="chat-window" id="chatWindow" aria-live="polite">
+        <!-- messages populated by JS -->
+        <div id="typingIndicator" class="typing-indicator hidden">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+
+      <div class="chat-input">
+        <input id="messageInput" type="text" placeholder="Type a message" autocomplete="off" />
+        <button id="sendBtn" aria-label="Send">➤</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

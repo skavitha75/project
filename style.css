@@ -1,0 +1,203 @@
+/* Reset + base */
+* { box-sizing: border-box; }
+:root{
+  --bg:#19232d;
+  --panel:#25343f;
+  --muted:#9aa9b6;
+  --accent:#0c84d8;
+  --sent:#20a060;
+  --received:#f1f4f7;
+}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg,#0f1720 0%, #15202b 100%);
+  color: #e6eef6;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+/* App container */
+.app{
+  width:100%;
+  max-width:1000px;
+  height:640px;
+  background:var(--panel);
+  border-radius:10px;
+  display:flex;
+  overflow:hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* Sidebar */
+.sidebar{
+  width:300px;
+  background:linear-gradient(180deg, #1a252c 0%, #162026 100%);
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  color:var(--muted);
+}
+
+.sidebar-header h2{
+  margin:0;
+  color:#fff;
+  font-size:20px;
+  letter-spacing:0.2px;
+}
+
+.contacts-list{
+  list-style:none;
+  margin:0;
+  padding:6px 0;
+  overflow:auto;
+  flex:1;
+}
+
+/* each contact */
+.contact{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:10px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:background .15s, transform .06s;
+  color:var(--muted);
+}
+.contact:hover{ background: rgba(255,255,255,0.03); transform: translateY(-1px); }
+
+.contact.active{ background: rgba(12,132,216,0.12); color:#fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02); }
+
+.avatar{
+  width:38px; height:38px; border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-weight:700;color:white;
+  flex-shrink:0;
+}
+.title{ font-weight:600; color:inherit; font-size:15px; }
+.subtitle{ font-size:12px; color:var(--muted); margin-top:2px; }
+
+/* footer */
+.sidebar-footer{ padding-top:8px; border-top:1px solid rgba(255,255,255,0.03); }
+#clearStorage{
+  width:100%;
+  padding:8px 10px;
+  border-radius:6px;
+  border:none;
+  background:transparent;
+  color:var(--muted);
+  cursor:pointer;
+}
+
+/* Chat area */
+.chat-area{ flex:1; display:flex; flex-direction:column; background:linear-gradient(180deg,#eaf2f7 0%, #eef6fb 100%); color:#10202a; }
+
+.chat-header{
+  padding:14px 18px;
+  background:var(--accent);
+  color:white;
+  font-weight:600;
+  font-size:18px;
+}
+
+/* chat window */
+.chat-window{
+  flex:1;
+  padding:18px;
+  overflow:auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  position:relative;
+}
+
+/* message bubbles */
+.msg{
+  max-width:68%;
+  padding:10px 14px;
+  border-radius:14px;
+  font-size:15px;
+  line-height:1.4;
+  box-shadow: 0 4px 12px rgba(16,32,40,0.08);
+  transform-origin: bottom;
+  animation: pop .12s ease;
+}
+
+.msg.received{
+  align-self:flex-start;
+  background:var(--received);
+  color:#0b1b22;
+  border-bottom-left-radius:4px;
+}
+
+.msg.sent{
+  align-self:flex-end;
+  background:var(--sent);
+  color:white;
+  border-bottom-right-radius:4px;
+}
+
+/* small timestamp */
+.ts{
+  font-size:11px;
+  color:rgba(0,0,0,0.45);
+  margin-top:6px;
+  opacity:0.7;
+}
+
+/* typing indicator */
+.typing-indicator{
+  align-self:flex-start;
+  display:flex;
+  gap:6px;
+  padding:8px 10px;
+  border-radius:12px;
+  background:var(--received);
+  margin-bottom:4px;
+}
+.typing-indicator .dot{
+  width:8px;height:8px;border-radius:50%;background:#9aa9b6; animation: bounce 1s infinite;
+}
+.typing-indicator .dot:nth-child(2){ animation-delay:.12s; }
+.typing-indicator .dot:nth-child(3){ animation-delay:.24s; }
+.hidden{ display:none; }
+
+/* input area */
+.chat-input{
+  display:flex;
+  gap:10px;
+  padding:12px;
+  background: #e6eef5;
+  align-items:center;
+}
+.chat-input input{
+  flex:1;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid rgba(3,24,40,0.06);
+  font-size:15px;
+}
+.chat-input button{
+  width:46px;height:46px;border-radius:50%;border:none; background:#0ea64a; color:white; font-size:18px; cursor:pointer;
+  box-shadow: 0 6px 16px rgba(14,166,74,0.18);
+}
+
+/* animations */
+@keyframes pop{ from{ transform: scale(.98); opacity:0 } to{ transform: scale(1); opacity:1 } }
+@keyframes bounce{
+  0%{ transform: translateY(0) scale(.9) }
+  50%{ transform: translateY(-6px) scale(1.05) }
+  100%{ transform: translateY(0) scale(.95) }
+}
+
+/* responsive */
+@media (max-width:800px){
+  .app{ height:92vh; max-width:720px; flex-direction:column; border-radius:8px; }
+  .sidebar{ width:100%; height:120px; flex-direction:row; gap:12px; overflow:auto; padding:12px; align-items:center; }
+  .contacts-list{ display:flex; gap:8px; align-items:center; flex-direction:row; }
+  .chat-area{ flex:1; }
+}
